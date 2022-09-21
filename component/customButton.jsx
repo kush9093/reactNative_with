@@ -1,10 +1,11 @@
 import { Pressable, StyleSheet, Text, View } from "react-native";
+import CustomText from "./customText";
 
 
 function CustomButton({children,onPress,disabled=""}) {
     return (<View style={styles.main}>
 <Pressable disabled={disabled} style={disabled==="disabled"?styles.btndisabled:styles.btn} onPress={onPress} android_ripple={{color:"#ccc"}}>
-    <Text style={styles.btntext}>{children}</Text>
+    <CustomText style={styles.btntext}>{children}</CustomText>
 </Pressable>
     </View>  );
 }
@@ -23,7 +24,6 @@ const styles = StyleSheet.create({
         padding: 10,
     },
     btntext: {
-        color:"white",
         textAlign:"center",
     },
     main:{
