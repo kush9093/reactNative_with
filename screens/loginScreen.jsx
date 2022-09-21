@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Alert, Button, Pressable, StyleSheet, Text, View } from "react-native";
 import CustomButton from "../component/customButton";
 import CustomInput from "../component/customInput";
+import CustomText from "../component/customText";
 import { sendLoginReq } from "../util/accounts";
 
 
@@ -52,7 +53,7 @@ return (
         </View>
         <View>
             <Pressable android_ripple={{ color: "#222" }} onPress={() => navigation.navigate("register")}>
-                <Text style={{ textAlign: "center", color: "white",fontFamily:"Mabifont" }}>계정을 생성하시겠습니까?</Text>
+                <CustomText style={{textAlign:"center"}}>계정을 생성하시겠습니까?</CustomText>
             </Pressable>
         </View>
     </View>
