@@ -32,7 +32,7 @@ export default function App() {
 
   return (
     <>
-    <StatusBar style="auto" />
+    <StatusBar style="light" />
     <NavigationContainer>
       <Tab.Navigator screenOptions={{headerTitleStyle:{fontFamily:"Mabifont"},headerStyle:{backgroundColor:"#111"},headerTintColor:"white",tabBarStyle:{backgroundColor:"#111"}}}>
         <Tab.Screen name="home" component={HomeScreen} options={{tabBarIcon : ({color})=>{return <Ionicons name="home" color={color} size={24} />}}} />
