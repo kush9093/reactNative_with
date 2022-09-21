@@ -22,11 +22,9 @@ function LoginScreen() {
                 const recv = await sendLoginReq(inputState.email, inputState.password);
                 if (recv.registered) {
                     navigation.navigate("home");
-                } else {
-                    Alert.alert("로그인 실패", "아이디 혹은 비밀번호를 다시 확인 바랍니다.")
                 }
             } catch (e) {
-                console.log(e)
+                Alert.alert("로그인 실패", "아이디 혹은 비밀번호를 다시 확인 바랍니다.")
             }
         }();
     }
