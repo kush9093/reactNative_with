@@ -14,7 +14,7 @@ const Stack = createStackNavigator();
 
 function AccountStackNavigator() {
  return( 
- <Stack.Navigator screenOptions={{headerStyle:{backgroundColor:"#111"},headerTintColor:"white"}}>
+ <Stack.Navigator screenOptions={{headerTitleStyle:{fontFamily:"Mabifont"},headerStyle:{backgroundColor:"#111"},headerTintColor:"white"}}>
   <Stack.Screen name="login" component={LoginScreen} options={{title:"Account/Login"}} />
   <Stack.Screen name="register" component={RegisterScreen}  options={{title:"Account/Register"}} />
   </Stack.Navigator>
@@ -34,7 +34,7 @@ export default function App() {
     <>
     <StatusBar style="auto" />
     <NavigationContainer>
-      <Tab.Navigator screenOptions={{headerStyle:{backgroundColor:"#111"},headerTintColor:"white",tabBarStyle:{backgroundColor:"#111"}}}>
+      <Tab.Navigator screenOptions={{headerTitleStyle:{fontFamily:"Mabifont"},headerStyle:{backgroundColor:"#111"},headerTintColor:"white",tabBarStyle:{backgroundColor:"#111"}}}>
         <Tab.Screen name="home" component={HomeScreen} options={{tabBarIcon : ({color})=>{return <Ionicons name="home" color={color} size={24} />}}} />
         <Tab.Screen name="account" component={AccountStackNavigator} options={{headerShown:false,
           tabBarIcon : ({color})=>{return <Ionicons name="person" color={color} size={24} />}}} />

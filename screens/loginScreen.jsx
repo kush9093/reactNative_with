@@ -52,7 +52,7 @@ return (
         </View>
         <View>
             <Pressable android_ripple={{ color: "#222" }} onPress={() => navigation.navigate("register")}>
-                <Text style={{ textAlign: "center", color: "white" }}>계정을 생성하시겠습니까?</Text>
+                <Text style={{ textAlign: "center", color: "white",fontFamily:"Mabifont" }}>계정을 생성하시겠습니까?</Text>
             </Pressable>
         </View>
     </View>

@@ -8,11 +8,15 @@ function CustomInput({type,onTrans}) {
     if(type.includes("password")){
         ispassword = true;
     }
+    let keyboardtype = "";
+    if(type.includes("email")){
+        keyboardtype = "email-address"
+    }
 
 
     return ( 
         <View>
-            <TextInput secureTextEntry={ispassword} style={styles.input} placeholder={type} onChangeText={(txt)=>{onTrans(txt)}}  maxLength={32}  />
+            <TextInput secureTextEntry={ispassword} style={styles.input} autoCapitalize="none" keyboardType="keyboardtype" placeholder={type} onChangeText={(txt)=>{onTrans(txt)}}  maxLength={32}  />
         </View>
      );
 }
