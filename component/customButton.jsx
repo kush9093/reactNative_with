@@ -2,10 +2,10 @@ import { Pressable, StyleSheet, Text, View } from "react-native";
 import CustomText from "./customText";
 
 
-function CustomButton({children,onPress,disabled=""}) {
+function CustomButton({children,onPress,disabled="",style,textstyle}) {
     return (<View style={styles.main}>
-<Pressable disabled={disabled} style={disabled==="disabled"?styles.btndisabled:styles.btn} onPress={onPress} android_ripple={{color:"#ccc"}}>
-    <CustomText style={styles.btntext}>{children}</CustomText>
+<Pressable disabled={disabled} style={[disabled==="disabled"?styles.btndisabled:styles.btn,style]} onPress={onPress} android_ripple={{color:"#ccc"}}>
+    <CustomText style={[styles.btntext,textstyle]}>{children}</CustomText>
 </Pressable>
     </View>  );
 }

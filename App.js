@@ -8,16 +8,36 @@ import LoginScreen from './screens/loginScreen';
 import RegisterScreen from './screens/registerScreen';
 import {Ionicons} from '@expo/vector-icons';
 import { useFonts } from 'expo-font';
+import { AppContext, AppContextProvider } from './context/app-context';
+import InfoScreen from './screens/infoScreen';
+import { useContext } from 'react';
+import SundryScreen from './screens/sundryScreen';
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
 
-function AccountStackNavigator() {
- return( 
- <Stack.Navigator screenOptions={{headerTitleStyle:{fontFamily:"Mabifont"},headerStyle:{backgroundColor:"#111"},headerTintColor:"white"}}>
+function GuestStackNavigator(){
+  return (
+    <Stack.Navigator screenOptions={{headerTitleStyle:{fontFamily:"Mabifont"},headerStyle:{backgroundColor:"#111"},headerTintColor:"white"}}>
   <Stack.Screen name="login" component={LoginScreen} options={{title:"Account/Login"}} />
   <Stack.Screen name="register" component={RegisterScreen}  options={{title:"Account/Register"}} />
   </Stack.Navigator>
+  )
+}
+function MemberStackNavigator(){
+  return (
+    <Stack.Navigator screenOptions={{headerTitleStyle:{fontFamily:"Mabifont"},headerStyle:{backgroundColor:"#111"},headerTintColor:"white"}}>
+    <Stack.Screen name="info" component={InfoScreen} options={{title:"내 정보"}} />
+    </Stack.Navigator>
+  )
+}
+
+
+function AccountStackNavigator() {
+ const ctx = useContext(AppContext)
+ return( <>
+  {ctx.value ? <MemberStackNavigator/>:<GuestStackNavigator/>}
+  </>
   )
 }
 
@@ -33,13 +53,16 @@ export default function App() {
   return (
     <>
     <StatusBar style="light" />
+    <AppContextProvider>
     <NavigationContainer>
-      <Tab.Navigator screenOptions={{headerTitleStyle:{fontFamily:"Mabifont"},headerStyle:{backgroundColor:"#111"},headerTintColor:"white",tabBarStyle:{backgroundColor:"#111"}}}>
-        <Tab.Screen name="home" component={HomeScreen} options={{tabBarIcon : ({color})=>{return <Ionicons name="home" color={color} size={24} />}}} />
+      <Tab.Navigator initialRouteName='account' screenOptions={{headerTitleStyle:{fontFamily:"Mabifont"},headerStyle:{backgroundColor:"#111"},headerTintColor:"white",tabBarStyle:{backgroundColor:"#111"}}}>
+        <Tab.Screen name="home" component={HomeScreen} options={{tabBarIcon : ({color})=>{return <Ionicons name="home-outline" color={color} size={24} />}}} />
+        <Tab.Screen name="sundry" component={SundryScreen} options={{tabBarIcon : ({color})=>{return <Ionicons name="document-text-outline" color={color} size={24} />}}} />
         <Tab.Screen name="account" component={AccountStackNavigator} options={{headerShown:false,
-          tabBarIcon : ({color})=>{return <Ionicons name="person" color={color} size={24} />}}} />
+          tabBarIcon : ({color})=>{return <Ionicons name="person-outline" color={color} size={24} />}}} />
       </Tab.Navigator>
     </NavigationContainer>
+    </AppContextProvider>
     </>
   );
 }

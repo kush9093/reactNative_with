@@ -1,8 +1,10 @@
 import { useNavigation } from "@react-navigation/native";
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { ActivityIndicator, Alert, Button, Pressable, StyleSheet, Text, View } from "react-native";
 import CustomButton from "../component/customButton";
 import CustomInput from "../component/customInput";
+import LoadingOverlay from "../component/loadingOverlay";
+import { AppContext } from "../context/app-context";
 import { sendRegisterReq } from "../util/accounts";
 
 
@@ -11,6 +13,8 @@ function RegisterScreen() {
     const [loading,setLoading] = useState(false);
 
     const [inputValue,setInputValue] = useState({email:"",password:"",passwordtwo:""});
+
+    const ctx = useContext(AppContext);
 
     const emailhandle = (elm) =>{
         setInputValue({...inputValue,email:elm});
@@ -34,8 +38,9 @@ function RegisterScreen() {
     !async function() {
         try{
       const recv = await sendRegisterReq(inputValue.email,inputValue.password);
-      console.log(recv)
-      navigation.navigate("login");
+      ctx.dispatch({type:"login",payload:recv})
+      AsyncStorage.setItem("authentication",JSON.stringify(recv))
+      navigation.navigate("home");
     } catch(e){
         Alert.alert("실패","회원 가입이 처리되지 않았습니다. 다시 시도해주시길 바랍니다.")
         console.log(e)
@@ -53,14 +58,15 @@ function RegisterScreen() {
     }
 
 if(loading){
-return <View style={{flex:1,justifyContent:"center",backgroundColor:"#ffffff"}}>
-    <ActivityIndicator size={48} />
-    </View>  
+return <LoadingOverlay/>  
 }
 
 
     const navigation = useNavigation();
-    navigation.setOptions({title:"회원가입"})
+    useEffect(()=>{
+
+        navigation.setOptions({title:"회원가입"})
+    },[])
     return ( 
         
         <View style={styles.main}>
