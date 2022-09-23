@@ -1,11 +1,22 @@
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { FlatList, StyleSheet, View } from "react-native";
 import CustomButton from "../component/customButton";
 import Modals from "../component/modal";
 import SundryItem from "../component/sundtyItem";
+import { AppContext } from "../context/app-context";
+import { blahRead } from "../util/blahUtil";
 
-function SundryScreen() {
+function SundryScreen({navigation,route}) {
      const [modalVisible, setModalVisible] = useState(false);
+     const ctx = useContext(AppContext);
+    const [dataa,setDataa] = useState([])
+    useEffect(()=>{
+         blahRead().then((data)=>{
+            setDataa(Object.entries(data));
+        })
+        
+    },[dataa])
+     
     return (
         <View style={styles.main}>
             <View style={{ flex: 1 }}>
@@ -23,14 +34,16 @@ function SundryScreen() {
                 </View>
             </View>
             <View style={{flex:9}}>
-            <FlatList data={["아","아","아","아아아아아아아아아아아아아아아아아아아아아아아아아아아"]}
+            <FlatList data={dataa}
             renderItem={({item,index})=>{
-                return (<SundryItem>{item}</SundryItem>)
+                return (<SundryItem item={item} onPress={()=>{navigation.navigate("blahDetail",{item})}}/>)
             }}
             />
             </View>
             <View style={{alignSelf: 'flex-end',position: 'absolute',bottom: 20}}>
-        <CustomButton onPress={()=>{setModalVisible(true)} } style={{borderRadius:"50%",padding:20,backgroundColor:"#aaa",opacity:0.95}}>➕</CustomButton>
+            {ctx.value &&
+        <CustomButton onPress={()=>{navigation.navigate("blahWrite")} } style={{borderRadius:"50%",padding:20,backgroundColor:"#aaa",opacity:0.95}}>➕</CustomButton>
+    }
             </View>
             <Modals modalVisible={modalVisible} setModalVisible={setModalVisible} />
         </View>

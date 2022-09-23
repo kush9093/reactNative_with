@@ -24,8 +24,9 @@ function InfoScreen({navigation,route}) {
                 text:"로그아웃",
                 onPress: () => {
                     recv.dispatch({type:"logout"});
-                    AsyncStorage.setItem("authentication",null)
-                    navigation.navigate("home");
+                    AsyncStorage.removeItem("authentication").then(()=>{
+                        navigation.navigate("home");
+                    })
                 }
             }
         ])

@@ -1,6 +1,14 @@
-import { Modal, Pressable, StyleSheet, Text, View } from "react-native";
+import { useState } from "react";
+import { Modal, Pressable, StyleSheet, Text, TextInput, View } from "react-native";
+import CustomInput from "./customInput";
 
 function Modals({modalVisible, setModalVisible}) {
+  const [txt,setTxt] = useState("")
+
+    const txtHandle = (txt) => {
+        setTxt(txt)
+    }
+
     return ( 
         <Modal
         animationType="slide"
@@ -13,13 +21,24 @@ function Modals({modalVisible, setModalVisible}) {
       >
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
-            <Text style={styles.modalText}>Hello World!</Text>
+            <Text style={styles.modalText}>글 쓰기</Text>
+            <View>
+              
+            </View>
+          <View style={{flexDirection:"row"}}>
             <Pressable
               style={[styles.button, styles.buttonClose]}
               onPress={() => setModalVisible(!modalVisible)}
             >
-              <Text style={styles.textStyle}>Hide Modal</Text>
+              <Text style={styles.textStyle}>작성</Text>
             </Pressable>
+            <Pressable
+              style={[styles.button, styles.buttonClose]}
+              onPress={() => setModalVisible(!modalVisible)}
+            >
+              <Text style={styles.textStyle}>취소</Text>
+            </Pressable>
+          </View>
           </View>
         </View>
       </Modal>
@@ -38,7 +57,7 @@ const styles = StyleSheet.create({
       margin: 20,
       backgroundColor: "white",
       borderRadius: 20,
-      padding: 35,
+      padding: 10,
       alignItems: "center",
       shadowColor: "#000",
       shadowOffset: {
@@ -50,9 +69,9 @@ const styles = StyleSheet.create({
       elevation: 5
     },
     button: {
-      borderRadius: 20,
       padding: 10,
-      elevation: 2
+      elevation: 2,
+      marginHorizontal:5
     },
     buttonOpen: {
       backgroundColor: "#F194FF",
