@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { StyleSheet, Text, TextInput, View } from "react-native";
 
-function CustomInput({ type, onTrans }) {
+function CustomInput({ type="", onTrans }) {
 
 
     let ispassword = false;

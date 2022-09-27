@@ -15,6 +15,8 @@ import SundryScreen from './screens/sundryScreen';
 import BlahDetailScreen from './screens/blahDetailScreen';
 import BlahWriteScreen from './screens/blahWriteScreen';
 import BlahReWriteScreen from './screens/blahReWriteScreen';
+import PlaceAddScreen from './screens/placeAddScreen';
+import ChooseLocationScreen from './screens/chooseLocationScreen';
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -56,6 +58,39 @@ function BlahStackNavigator() {
 }
 
 
+function HomeStackNavigator() {
+  return (
+    <Stack.Navigator initialRouteName='placeAdd'
+      screenOptions={
+        {
+          headerTitleStyle: {
+            fontFamily: "Mabifont",
+            fontSize: 32
+          },
+        }
+      } >
+      <Stack.Screen name="home" component={HomeScreen} options={{ title: "With°", }} />
+      <Stack.Screen name="placeAdd" component={PlaceAddScreen}
+        options={{ title: "공유하기",headerStyle:{backgroundColor:"#111"},headerTintColor:"white" }} />
+      <Stack.Screen name="chooseLocation" component={ChooseLocationScreen}
+        options={{ title: "위치설정하기", presentation: "modal" }} />
+    </Stack.Navigator>
+  )
+}
+
+
+function RootNavigator(){
+  return (
+    <Tab.Navigator initialRouteName='account' screenOptions={{headerTitleStyle:{fontFamily:"Mabifont"},headerStyle:{backgroundColor:"#111"},headerTintColor:"white",tabBarStyle:{backgroundColor:"#111"}}}>
+    <Tab.Screen name="home" component={HomeStackNavigator} options={{tabBarIcon : ({color})=>{return <Ionicons name="home-outline" color={color} size={24} />}}} />
+    {/* <Tab.Screen name="sundry" component={SundryScreen} options={{tabBarIcon : ({color})=>{return <Ionicons name="document-text-outline" color={color} size={24} />}}} /> */}
+    <Tab.Screen name="blahStack" component={BlahStackNavigator} options={{headerShown:false,unmountOnBlur:true,tabBarIcon : ({color})=>{return <Ionicons name="document-attach" color={color} size={24} />}}} />
+    <Tab.Screen name="account" component={AccountStackNavigator} options={{headerShown:false,
+      tabBarIcon : ({color})=>{return <Ionicons name="person-outline" color={color} size={24} />}}} />
+  </Tab.Navigator>
+  )
+}
+
 
 export default function App() {
   const [loaded] = useFonts({"Mabifont":require("./assets/fonts/Mabinogi_Classic_OTF.otf")})
@@ -71,13 +106,7 @@ export default function App() {
     <StatusBar style="light" />
     <AppContextProvider>
     <NavigationContainer>
-      <Tab.Navigator initialRouteName='account' screenOptions={{headerTitleStyle:{fontFamily:"Mabifont"},headerStyle:{backgroundColor:"#111"},headerTintColor:"white",tabBarStyle:{backgroundColor:"#111"}}}>
-        <Tab.Screen name="home" component={HomeScreen} options={{tabBarIcon : ({color})=>{return <Ionicons name="home-outline" color={color} size={24} />}}} />
-        {/* <Tab.Screen name="sundry" component={SundryScreen} options={{tabBarIcon : ({color})=>{return <Ionicons name="document-text-outline" color={color} size={24} />}}} /> */}
-        <Tab.Screen name="blahStack" component={BlahStackNavigator} options={{headerShown:false,unmountOnBlur:true,tabBarIcon : ({color})=>{return <Ionicons name="document-attach" color={color} size={24} />}}} />
-        <Tab.Screen name="account" component={AccountStackNavigator} options={{headerShown:false,
-          tabBarIcon : ({color})=>{return <Ionicons name="person-outline" color={color} size={24} />}}} />
-      </Tab.Navigator>
+      <RootNavigator/>
     </NavigationContainer>
     </AppContextProvider>
     </>

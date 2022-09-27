@@ -42,7 +42,7 @@ function SundryScreen({navigation,route}) {
             </View>
             <View style={{alignSelf: 'flex-end',position: 'absolute',bottom: 20}}>
             {ctx.value &&
-        <CustomButton onPress={()=>{navigation.navigate("blahWrite")} } style={{borderRadius:"50%",padding:20,backgroundColor:"#aaa",opacity:0.95}}>➕</CustomButton>
+        <CustomButton onPress={()=>{navigation.navigate("blahWrite")} } style={{borderRadius:200,padding:20,backgroundColor:"#aaa",opacity:0.95}}>➕</CustomButton>
     }
             </View>
             <Modals modalVisible={modalVisible} setModalVisible={setModalVisible} />
