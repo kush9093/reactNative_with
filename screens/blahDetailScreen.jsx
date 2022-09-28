@@ -1,4 +1,5 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useIsFocused } from "@react-navigation/native";
 import { useEffect, useState } from "react";
 import { Alert, Image, Text, View } from "react-native";
 import CustomButton from "../component/customButton";
@@ -10,6 +11,7 @@ function BlahDetailScreen({navigation,route}) {
     const id = route.params.item[0];
     const [item,setItem] = useState({})
     const [emaild,setEmaild] = useState("")
+    const isFocused = useIsFocused()
     AsyncStorage.getItem("authentication").then((data)=>{
         let dd = JSON.parse(data).email;
         setEmaild(dd)
@@ -18,7 +20,7 @@ function BlahDetailScreen({navigation,route}) {
         blahOneRead(id).then((data)=>{
             setItem({...data});
         })
-    },[])
+    },[isFocused])
     return ( 
         <View style={{backgroundColor:"white", flex:1}}>
             <View style={{flexDirection:"row",justifyContent:"flex-end"}}>

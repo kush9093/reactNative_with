@@ -27,16 +27,17 @@ export default function ImagePicker({onPicked}) {
             quality: 0.5,
             allowsEditing: true,
             aspect: [16, 9],
-            exif: true
+            exif: true,
+            base64:true,
         });
         if (!result.cancelled) {
-            const lat = result.exif.GPSLatitude;
-            const lng = result.exif.GPSLongitude;
+            const lat = result?.exif?.GPSLatitude;
+            const lng = result?.exif?.GPSLongitude;
             if(lat&&lng){
                 console.log(lat,lng);
             }
             setImageUri(result.uri);
-            onPicked(result.uri);
+            onPicked(result.uri,result.base64);
         }
     }
 
@@ -58,13 +59,18 @@ export default function ImagePicker({onPicked}) {
             quality: 0.5,
             allowsEditing: true,
             aspect: [16, 9],
-            exif: true
+            exif: true,
+            base64:true
         });
-
         if (!result.cancelled) {
+            // console.log(result.base64);
             setImageUri(result.uri);
-            onPicked(result.uri);
             console.log(result.exif);
+            if(result.exif.GPSLatitude && result.exif.GPSLongitude){
+                onPicked(result.uri,result.base64,{latitude:result.exif.GPSLatitude,longitude:result.exif.GPSLongitude});
+            } else {
+                onPicked(result.uri,result.base64);
+            }
         }
         // launchCameraAsync({}).then(result => {setImageUri(result.uri)});
     }

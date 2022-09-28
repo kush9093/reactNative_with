@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const GOOGLE_APP_KEY = "AIzaSyDAKkqFADR1jg8WqpIBbLBQS_ebz2BURYU";
+const GOOGLE_APP_KEY = "AIzaSyCLvDjOvXJCiiGmo3hVXtjWhVOhuEWDHDE";
 
 export function createStaticMapURI(lat, lng) {
     return `https://maps.googleapis.com/maps/api/staticmap?center=${lat},${lng}&zoom=17&key=${GOOGLE_APP_KEY}&size=800x450&markers=color:red%7C${lat},${lng}`;

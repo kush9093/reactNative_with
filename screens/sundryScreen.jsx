@@ -1,3 +1,4 @@
+import { useIsFocused } from "@react-navigation/native";
 import { useContext, useEffect, useState } from "react";
 import { FlatList, StyleSheet, View } from "react-native";
 import CustomButton from "../component/customButton";
@@ -10,12 +11,13 @@ function SundryScreen({navigation,route}) {
      const [modalVisible, setModalVisible] = useState(false);
      const ctx = useContext(AppContext);
     const [dataa,setDataa] = useState([])
+    const isFocused = useIsFocused()
     useEffect(()=>{
          blahRead().then((data)=>{
             setDataa(Object.entries(data));
         })
         
-    },[dataa])
+    },[isFocused])
      
     return (
         <View style={styles.main}>
