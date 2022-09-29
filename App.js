@@ -17,9 +17,11 @@ import BlahWriteScreen from './screens/blahWriteScreen';
 import BlahReWriteScreen from './screens/blahReWriteScreen';
 import PlaceAddScreen from './screens/placeAddScreen';
 import ChooseLocationScreen from './screens/chooseLocationScreen';
+import PlaceDetailScreen from './screens/placeDetailScreen';
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
+
 
 function GuestStackNavigator(){
   return (
@@ -70,6 +72,7 @@ function HomeStackNavigator() {
         }
       } >
       <Stack.Screen name="with" component={HomeScreen} options={{ title: "With°",headerStyle:{backgroundColor:"#111"},headerTintColor:"white"}} />
+      <Stack.Screen name="withDetail" component={PlaceDetailScreen} options={{headerStyle:{backgroundColor:"#111"},headerTintColor:"white"}} />
       <Stack.Screen name="placeAdd" component={PlaceAddScreen}
         options={{ title: "공유하기",headerStyle:{backgroundColor:"#111"},headerTintColor:"white"}} />
       <Stack.Screen name="chooseLocation" component={ChooseLocationScreen}

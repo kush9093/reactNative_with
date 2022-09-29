@@ -19,3 +19,12 @@ export async function sendLoginReq(email,password){
     })
     return response.data
 }
+
+export async function sendReplaceToken(token){
+    console.log("sendReplaceToken .."+token)
+    const response = await axios.post("https://identitytoolkit.googleapis.com/v1/token?key="+APP_KEY,{
+        grant_type : "refresh_token",
+        refresh_token:token
+    });
+    return response.data;
+}

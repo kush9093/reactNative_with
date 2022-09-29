@@ -2,6 +2,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { createContext, useEffect, useReducer, useState } from "react";
 import { ActivityIndicator, View } from "react-native";
 import LoadingOverlay from "../component/loadingOverlay";
+import { sendReplaceToken } from "../util/accounts";
 
 
 export const AppContext = createContext({});
@@ -22,11 +23,18 @@ export function AppContextProvider({ children }) {
     const [done,setDone] = useState(false);
     useEffect(() => {
         AsyncStorage.getItem("authentication").then((data) => {
+            const token = JSON.parse(data)
             if(data){
-            dispatch({ type: "login", payload: JSON.parse(data) })
+                sendReplaceToken(token.refreshToken).then((newdata)=>{
+                   const combiendData = {...token,...newdata};
+                   dispatch({type:"login",payload:combiendData});
+                   AsyncStorage.setItem("authentication",JSON.stringify(combiendData))
+                   setDone(true);
+                })
+        } else {
+            setDone(true);
         }
-        setDone(true);
-        })
+    })
     }, [])
 
         if(!done){

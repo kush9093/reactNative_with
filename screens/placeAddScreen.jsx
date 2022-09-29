@@ -39,6 +39,12 @@ export default function PlaceAddScreen({route,navigation}) {
             location : placeLocation,
             createAt: new Date()
         }
+        if(placeInfo==null || placeImage==null || placeLocation==null){
+            console.log(placeInfo,placeImage,placeLocation)
+            Alert.alert("오류","아직 입력 하지 않은 데이터가 존재합니다!!")
+        }else {
+
+        
         sendAddPlaceRequest(data,placeImageBase64,placeImage).then((statd)=>{
             if(statd===200){
                 navigation.navigate("with");
@@ -46,6 +52,7 @@ export default function PlaceAddScreen({route,navigation}) {
                 Alert.alert("오류","서버와 연결 상태가 좋지 않거나 다시 로그인 해주시길 바랍니다.")
             }
         })
+    }
     }
 
 
