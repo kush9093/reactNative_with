@@ -12,6 +12,8 @@ function BlahDetailScreen({navigation,route}) {
     const [item,setItem] = useState({})
     const [emaild,setEmaild] = useState("")
     const isFocused = useIsFocused()
+    console.log(item);
+    console.log(emaild);
     AsyncStorage.getItem("authentication").then((data)=>{
         let dd = JSON.parse(data).email;
         setEmaild(dd)

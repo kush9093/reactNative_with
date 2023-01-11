@@ -14,7 +14,7 @@ function dated(){
 export async function blahWrite(head,contents) {
     const data = await AsyncStorage.getItem("authentication")
     const cdata = JSON.parse(data);
-    const response = await axios.post("https://with-288b0-default-rtdb.asia-southeast1.firebasedatabase.app/blahblah.json?auth="+cdata.idToken , {
+    const response = await axios.post("https://with-d6cb3-default-rtdb.asia-southeast1.firebasedatabase.app/blahblah.json?auth="+cdata.idToken , {
         "title": head,
         "createdAt": dated(),
         "writer": cdata.email,
@@ -25,13 +25,13 @@ export async function blahWrite(head,contents) {
 
 export async function blahRead(){
 
-    const response = await axios.get("https://with-288b0-default-rtdb.asia-southeast1.firebasedatabase.app/blahblah.json");
+    const response = await axios.get("https://with-d6cb3-default-rtdb.asia-southeast1.firebasedatabase.app/blahblah.json");
     return response.data
 
 }
 
 export async function blahOneRead(id){
-    const response = await axios.get("https://with-288b0-default-rtdb.asia-southeast1.firebasedatabase.app/blahblah/"+id+".json");
+    const response = await axios.get("https://with-d6cb3-default-rtdb.asia-southeast1.firebasedatabase.app/blahblah/"+id+".json");
     return response.data
 
 }
@@ -41,7 +41,7 @@ export async function blahDelete(id,email){
     const data = await AsyncStorage.getItem("authentication")
     const cdata = JSON.parse(data);
     if(email===cdata.email){
-    const response = await axios.delete("https://with-288b0-default-rtdb.asia-southeast1.firebasedatabase.app/blahblah/"+id+".json?auth="+cdata.idToken)
+    const response = await axios.delete("https://with-d6cb3-default-rtdb.asia-southeast1.firebasedatabase.app/blahblah/"+id+".json?auth="+cdata.idToken)
     return response.data;
 } else {
     return false
@@ -54,7 +54,7 @@ export async function blahReWrite(id,email,title,contents){
     const data = await AsyncStorage.getItem("authentication")
     const cdata = JSON.parse(data);
     if(email===cdata.email){
-    const response = await axios.patch("https://with-288b0-default-rtdb.asia-southeast1.firebasedatabase.app/blahblah/"+id+".json?auth="+cdata.idToken,
+    const response = await axios.patch("https://with-d6cb3-default-rtdb.asia-southeast1.firebasedatabase.app/blahblah/"+id+".json?auth="+cdata.idToken,
     {
         "title":title,
         "contents":contents

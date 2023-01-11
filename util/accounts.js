@@ -1,6 +1,6 @@
 import axios from "axios"
 
-const APP_KEY = "AIzaSyBEAP6Hi4e79OYtnVNZRcqnPQKx0dAbmJw"
+const APP_KEY = "AIzaSyCXGbEmnRU-NXeeBUoFAAVHfRsh6sYUGow"
 
 
 export async function sendRegisterReq(email, password) {

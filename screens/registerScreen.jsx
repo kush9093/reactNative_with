@@ -1,3 +1,4 @@
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useNavigation } from "@react-navigation/native";
 import { useContext, useEffect, useState } from "react";
 import { ActivityIndicator, Alert, Button, Pressable, StyleSheet, Text, View } from "react-native";
@@ -13,6 +14,12 @@ function RegisterScreen() {
     const [loading,setLoading] = useState(false);
 
     const [inputValue,setInputValue] = useState({email:"",password:"",passwordtwo:""});
+
+    const navigation = useNavigation();
+    
+    useEffect(()=>{
+        navigation.setOptions({title:"회원가입"})
+    },[])
 
     const ctx = useContext(AppContext);
 
@@ -39,7 +46,7 @@ function RegisterScreen() {
         try{
       const recv = await sendRegisterReq(inputValue.email,inputValue.password);
       ctx.dispatch({type:"login",payload:recv})
-      AsyncStorage.setItem("authentication",JSON.stringify(recv))
+      await AsyncStorage.setItem("authentication",JSON.stringify(recv))
       navigation.navigate("home");
     } catch(e){
         Alert.alert("실패","회원 가입이 처리되지 않았습니다. 다시 시도해주시길 바랍니다.")
@@ -61,12 +68,8 @@ if(loading){
 return <LoadingOverlay/>  
 }
 
-
-    const navigation = useNavigation();
-    useEffect(()=>{
-
-        navigation.setOptions({title:"회원가입"})
-    },[])
+ 
+    
     return ( 
         
         <View style={styles.main}>

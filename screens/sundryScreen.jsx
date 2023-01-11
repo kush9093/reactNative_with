@@ -14,7 +14,9 @@ function SundryScreen({navigation,route}) {
     const isFocused = useIsFocused()
     useEffect(()=>{
          blahRead().then((data)=>{
-            setDataa(Object.entries(data));
+            if(data !== null){
+                setDataa(Object.entries(data));
+            }
         })
         
     },[isFocused])

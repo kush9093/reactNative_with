@@ -12,7 +12,7 @@ export async function sendAddPlaceRequest(placeData,fileData,fileURI){
     // console.log(fileURI);
     const fileName = fileURI.substring(fileURI.lastIndexOf("/")+1)
     // console.log(fileName);
-    const endPoint = `https://firebasestorage.googleapis.com/v0/b/with-288b0.appspot.com/o/${fileName}`
+    const endPoint = `https://firebasestorage.googleapis.com/v0/b/with-d6cb3.appspot.com/o/${fileName}`
     const uploadResult = await axios({
         url:endPoint,
         headers:{
@@ -27,7 +27,7 @@ export async function sendAddPlaceRequest(placeData,fileData,fileURI){
     const placeItem = {...placeData,imageURL: endPoint+"?alt=media"};
     const data = await AsyncStorage.getItem("authentication")
     const cdata = JSON.parse(data);
-    const response = await axios.post("https://with-288b0-default-rtdb.asia-southeast1.firebasedatabase.app/places.json?auth="+cdata.idToken , {
+    const response = await axios.post("https://with-d6cb3-default-rtdb.asia-southeast1.firebasedatabase.app/places.json?auth="+cdata.idToken , {
         "title": placeItem.title,
         "createAt": placeItem.createAt,
         "writer": cdata.email,
@@ -40,13 +40,14 @@ export async function sendAddPlaceRequest(placeData,fileData,fileURI){
 
 export async function sendReadPlaceRequest() {
 
-    const response = await axios.get("https://with-288b0-default-rtdb.asia-southeast1.firebasedatabase.app/places.json");
+    const response = await axios.get("https://with-d6cb3-default-rtdb.asia-southeast1.firebasedatabase.app/places.json");
     const datas = [];
-
+    if(response.data !== undefined){   
     Object.keys(response.data).forEach((key)=>{
         const temp = {key, ...response.data[key]};
         datas.push(temp);
     });
+}
     return datas;
 
 
